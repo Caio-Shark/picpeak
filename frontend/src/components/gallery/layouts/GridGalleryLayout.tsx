@@ -1,4 +1,5 @@
 import React from 'react';
+import { tr } from '../../../utils/tr';
 import { MessageSquare, Star, Heart, Video, Eye, EyeOff } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../../contexts/ThemeContext';
@@ -148,17 +149,17 @@ const GridPhoto: React.FC<GridPhotoProps> = ({
       {(commentCount > 0 || averageRating > 0 || likeCount > 0 || liked) && (
         <div className={`absolute ${photo.type === 'collage' ? 'bottom-8' : 'bottom-2'} left-2 flex items-center gap-1 z-10`}>
           {(likeCount > 0 || liked) && (
-            <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/90 backdrop-blur-sm" title="Liked">
+            <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/90 backdrop-blur-sm" title={t('ui.liked', 'Liked')}>
               <Heart className="w-3.5 h-3.5 text-red-500" fill="currentColor" />
             </span>
           )}
           {averageRating > 0 && (
-            <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/90 backdrop-blur-sm" title="Rated">
+            <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/90 backdrop-blur-sm" title={t('ui.rated', 'Rated')}>
               <Star className="w-3.5 h-3.5 text-yellow-500" fill="currentColor" />
             </span>
           )}
           {commentCount > 0 && (
-            <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/90 backdrop-blur-sm" title="Commented">
+            <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/90 backdrop-blur-sm" title={t('ui.commented', 'Commented')}>
               <MessageSquare className="w-3.5 h-3.5 text-accent" fill="currentColor" />
             </span>
           )}
@@ -283,7 +284,7 @@ export const GridGalleryLayout: React.FC<BaseGalleryLayoutProps> = ({
                     ? 'bg-red-500/90 text-white hover:bg-red-600'
                     : 'bg-white/90 text-neutral-700 hover:bg-white dark:bg-neutral-800/90 dark:text-neutral-200 dark:hover:bg-neutral-700'
                 }`}
-                title={isHidden ? 'Hidden from guests' : 'Visible to guests'}
+                title={isHidden ? tr('ui.hiddenFromGuests', 'Hidden from guests') : tr('ui.visibleToGuests', 'Visible to guests')}
               >
                 {isHidden ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { tr } from '../../utils/tr';
 import { clsx } from 'clsx';
 import { Loader2 } from 'lucide-react';
 
@@ -56,7 +57,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         aria-disabled={disabled || isLoading}
       >
         {isLoading ? (
-          <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-label="Loading" />
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-label={tr('ui.loading', 'Loading')} />
         ) : (
           leftIcon && <span className="mr-2" aria-hidden="true">{leftIcon}</span>
         )}

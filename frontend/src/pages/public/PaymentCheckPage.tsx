@@ -14,6 +14,7 @@
  * via the shared `usePublicDarkMode` hook.
  */
 import React, { useEffect, useState } from 'react';
+import { tr } from '../../utils/tr';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
@@ -270,7 +271,7 @@ const BrandingHeader: React.FC<{ issuer: PaymentCheckIssuer | null }> = ({ issue
       {logo && (
         <img
           src={logo}
-          alt={issuer.companyName || 'Logo'}
+          alt={issuer.companyName || tr('ui.logo', 'Logo')}
           className="mx-auto h-16 w-auto object-contain mb-3"
         />
       )}

@@ -34,11 +34,13 @@ import { isGalleryPublic } from '../../utils/accessControl';
 import { buildShareLinkUrl } from '../../utils/url';
 import type { Event } from '../../types';
 import { useTranslation } from 'react-i18next';
+import { useEventTypeName } from '../../hooks/useEventTypeName';
 
 const PAGE_SIZE = 20;
 
 export const EventsListPage: React.FC = () => {
   const { t } = useTranslation();
+  const eventTypeName = useEventTypeName();
   const { format } = useLocalizedDate();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -549,7 +551,7 @@ export const EventsListPage: React.FC = () => {
                         </div>
                       </td>
                       <td className="px-6 py-4 text-sm text-neutral-700 dark:text-neutral-300">
-                        {event.event_type}
+                        {eventTypeName(event.event_type)}
                       </td>
                       <td className="px-6 py-4 text-sm text-neutral-700 dark:text-neutral-300">
                         {event.event_date ? format(parseISO(event.event_date)) : 'N/A'}

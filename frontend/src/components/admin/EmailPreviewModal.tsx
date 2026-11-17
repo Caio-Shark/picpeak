@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { X, Mail, FileText } from 'lucide-react';
 import { Button, Card } from '../common';
 
@@ -17,6 +18,7 @@ export const EmailPreviewModal: React.FC<EmailPreviewModalProps> = ({
   htmlContent,
   textContent
 }) => {
+  const { t } = useTranslation();
   const [viewMode, setViewMode] = React.useState<'html' | 'text'>('html');
 
   if (!isOpen) return null;
@@ -28,7 +30,7 @@ export const EmailPreviewModal: React.FC<EmailPreviewModalProps> = ({
         <div className="flex items-center justify-between p-6 border-b border-neutral-200 dark:border-neutral-700">
           <div className="flex items-center gap-3">
             <Mail className="w-6 h-6 text-accent" />
-            <h2 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100">Email Preview</h2>
+            <h2 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100">{t('ui.emailPreview', 'Email Preview')}</h2>
           </div>
           <button
             onClick={onClose}
@@ -75,7 +77,7 @@ export const EmailPreviewModal: React.FC<EmailPreviewModalProps> = ({
               <iframe
                 srcDoc={htmlContent}
                 className="w-full h-[600px] border-0"
-                title="Email Preview"
+                title={t('ui.emailPreview', 'Email Preview')}
                 sandbox="allow-same-origin"
               />
             </div>

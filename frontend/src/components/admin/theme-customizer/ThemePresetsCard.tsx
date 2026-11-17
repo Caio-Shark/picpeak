@@ -48,9 +48,9 @@ export const ThemePresetsCard: React.FC<ThemePresetsCardProps> = ({
           >
             <div className="flex items-start justify-between mb-2">
               <div>
-                <span className="font-medium text-sm block text-neutral-900 dark:text-neutral-100">{theme.name}</span>
+                <span className="font-medium text-sm block text-neutral-900 dark:text-neutral-100">{t(`ui.themes.${key}.name`, theme.name)}</span>
                 {theme.description && (
-                  <span className="text-xs text-neutral-600 dark:text-neutral-400 mt-1 block">{theme.description}</span>
+                  <span className="text-xs text-neutral-600 dark:text-neutral-400 mt-1 block">{t(`ui.themes.${key}.description`, theme.description)}</span>
                 )}
               </div>
               {selectedPreset === key && (

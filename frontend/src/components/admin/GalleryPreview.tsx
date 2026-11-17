@@ -84,7 +84,7 @@ export const GalleryPreview: React.FC<GalleryPreviewProps> = ({
   const displayMode = branding?.logo_display_mode || 'logo_and_text';
   const showLogo = displayMode === 'logo_only' || displayMode === 'logo_and_text';
   const showText = displayMode === 'text_only' || displayMode === 'logo_and_text';
-  const brandName = branding?.company_name?.trim() || 'Your Studio';
+  const brandName = branding?.company_name?.trim() || t('ui.yourStudio', 'Your Studio');
   const brandTagline = branding?.company_tagline?.trim() || '';
   // Theme-aware logo with symmetric fallback — mirror the live surfaces
   // so the preview reflects what the gallery will actually show.
@@ -335,7 +335,7 @@ export const GalleryPreview: React.FC<GalleryPreviewProps> = ({
 
       {/* Layout info bar */}
       <div className="px-4 py-1 border-b text-xs text-neutral-500 flex justify-between" style={{ borderColor: theme.primaryColor ? `${theme.primaryColor}20` : '#e5e7eb' }}>
-        <span>Gallery preview</span>
+        <span>{t('ui.galleryPreview', 'Gallery preview')}</span>
         <span className="capitalize">{isHeroHeader ? `Hero + ${activeLayout}` : isMinimalHeader ? `Minimal + ${activeLayout}` : isNoHeader ? `No header + ${activeLayout}` : `${activeLayout} layout`}</span>
       </div>
 

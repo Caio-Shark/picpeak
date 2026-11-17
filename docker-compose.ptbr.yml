@@ -1,0 +1,29 @@
+# Override local pt-BR: constrói backend e frontend a partir do código desta
+# branch (tradução para português brasileiro) em vez de baixar as imagens
+# oficiais pré-compiladas, que não contêm essas alterações.
+#
+# Uso (já configurado no .env via COMPOSE_FILE):
+#   docker compose build          # reconstrói as imagens locais
+#   docker compose up -d          # sobe a pilha
+#
+# Postgres, Redis e o restante continuam vindo de docker-compose.production.yml.
+services:
+  backend:
+    image: picpeak-ptbr/backend:3.135.16-ptbr
+    pull_policy: build
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      args:
+        VERSION: 3.135.16-ptbr
+
+  frontend:
+    image: picpeak-ptbr/frontend:3.135.16-ptbr
+    pull_policy: build
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VERSION: 3.135.16-ptbr
+        # Idioma padrão da interface quando o visitante ainda não escolheu um.
+        VITE_DEFAULT_LANGUAGE: pt

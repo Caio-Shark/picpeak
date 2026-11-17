@@ -866,7 +866,8 @@
     "replacedFiles_other": "{{count}} Fotos ersetzt",
     "uploadingChunks_one": "{{count}} Teil wird hochgeladen",
     "uploadingChunks_other": "{{count}} Teile werden hochgeladen",
-    "fileTooLarge": "Datei zu groß: {{name}} (max. {{limit}}MB)"
+    "fileTooLarge": "Datei zu groß: {{name}} (max. {{limit}}MB)",
+    "largeFileReplaceSkipped": "Ersetzen nach Dateiname wird für Dateien über der Batch-Größe nicht unterstützt; laden Sie sie ohne Ersetzen hoch."
   },
   "navigation": {
     "dashboard": "Dashboard",
@@ -3165,6 +3166,11 @@
         "title": "Personen in Galerien",
         "description": "Gruppiert die Fotos jeder Galerie nach den abgebildeten Personen, damit Gäste sich mit zwei Tipps selbst finden und nur ihre eigenen Fotos herunterladen. Läuft vollständig auf Ihrem eigenen Server in einem separaten, optionalen Container — es werden keine Daten übermittelt. Erkannte Gesichter sind personenbezogene Daten; die Funktion bleibt daher aus, bis Sie sie zusätzlich pro Galerie aktivieren.",
         "lockedSingleContainer": "Im All-in-One-Image nicht verfügbar. Die Gesichtserkennung benötigt einen separaten ML-Container und konkurriert mit der Bildverarbeitung um dieselbe CPU und denselben Arbeitsspeicher, was die gesamte Installation verlangsamen würde."
+      },
+      "newsletters": {
+        "title": "Newsletter",
+        "sidebar": "Newsletter",
+        "description": "Senden Sie eine Marketing-Kampagne an Ihre Kundenkonten. Verfassen Sie den Text im Rich-Text-Editor, prüfen Sie die Vorschau, senden Sie sich einen Test und reihen Sie sie dann ein — der Versand wird zeitlich verteilt, damit Ihr Mailanbieter Sie nicht drosselt. Jeder Kunde kann einzeln abgemeldet werden, abgemeldete Kunden werden automatisch übersprungen, und jede Kampagne enthält einen Abmeldelink. E-Mails zu Galerien, Angeboten und Rechnungen sind nie betroffen."
       }
     },
     "customerSurface": {
@@ -7121,6 +7127,9 @@
     },
     "crm_overview_show_invoices": {
       "label": "Rechnungs-Pipeline (nach Status)"
+    },
+    "crm_invoices_late_fee_vat_enabled": {
+      "label": "MWST auf Mahngebühren erheben (Schweiz — für DE/AT deaktiviert lassen; ohne Wirkung, wenn Ihre Organisation keinen MWST-Satz hat)"
     }
   },
   "quoteResponse": {
@@ -7856,5 +7865,173 @@
       "codeFormat": "Geben Sie den 6-stelligen Code aus der E-Mail ein.",
       "generic": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
     }
+  },
+  "ui": {
+    "failedToLoad": "Laden fehlgeschlagen",
+    "failedToLoadMedia": "Medien konnten nicht geladen werden",
+    "failedToLoadImage": "Bild konnte nicht geladen werden",
+    "imageUnavailable": "Bild nicht verfügbar",
+    "galleryPreview": "Galerievorschau",
+    "emailPreview": "E-Mail-Vorschau",
+    "themePreview": "Theme-Vorschau",
+    "themePreviewDescription": "So sehen Ihre Galerien mit den aktuellen Theme-Einstellungen aus",
+    "pageNotFound": "Seite nicht gefunden",
+    "photoFeedback": "Foto-Feedback",
+    "noFeedbackForPhoto": "Für dieses Foto gibt es noch kein Feedback.",
+    "photoDeleted": "Foto erfolgreich gelöscht",
+    "photoDeleteFailed": "Foto konnte nicht gelöscht werden",
+    "photosDeleteFailed": "Fotos konnten nicht gelöscht werden",
+    "photoDownloaded": "Foto erfolgreich heruntergeladen",
+    "photoDownloadFailed": "Foto konnte nicht heruntergeladen werden",
+    "photosDownloadFailed": "Fotos konnten nicht heruntergeladen werden",
+    "photoSaveFailed": "Foto konnte nicht gespeichert werden",
+    "downloadStarted": "Download gestartet",
+    "categoryUpdated": "Kategorie aktualisiert",
+    "categoryUpdateFailed": "Kategorie konnte nicht aktualisiert werden",
+    "confirmDeletePhoto": "Möchten Sie „{{filename}}“ wirklich löschen?",
+    "confirmDeletePhotos_one": "Möchten Sie {{count}} Foto wirklich löschen?",
+    "confirmDeletePhotos_other": "Möchten Sie {{count}} Fotos wirklich löschen?",
+    "confirmDeleteComment": "Möchten Sie diesen Kommentar wirklich löschen?",
+    "unsavedChangesPrompt": "Sie haben ungespeicherte Änderungen. Möchten Sie sie speichern?",
+    "invalidFileType": "Ungültiger Dateityp: {{name}}",
+    "closeSidebar": "Seitenleiste schließen",
+    "closeWarning": "Warnung schließen",
+    "scrollToGallery": "Zur Galerie scrollen",
+    "scrollToTop": "Nach oben scrollen",
+    "previousPhoto": "Vorheriges Foto",
+    "nextPhoto": "Nächstes Foto",
+    "viewFullscreen": "Vollbild anzeigen",
+    "viewFullSize": "In voller Größe anzeigen",
+    "downloadPhoto": "Foto herunterladen",
+    "likePhoto": "Foto liken",
+    "commentOnPhoto": "Foto kommentieren",
+    "zoomIn": "Vergrößern",
+    "zoomOut": "Verkleinern",
+    "fitToScreen": "An Bildschirm anpassen",
+    "ratePhoto": "Foto bewerten",
+    "toggleFeedback": "Feedback ein-/ausblenden",
+    "closeFeedback": "Feedback schließen",
+    "eventLogo": "Event-Logo",
+    "darkLogo": "Dunkles Logo",
+    "lineBreaksPreserved": "Zeilenumbrüche bleiben in E-Mails erhalten",
+    "noDivider": "Kein Trenner",
+    "analyticsDashboard": "Analyse-Dashboard",
+    "photosDeleted_one": "{{count}} Foto erfolgreich gelöscht",
+    "photosDeleted_other": "{{count}} Fotos erfolgreich gelöscht",
+    "protection": {
+      "devtoolsTitle": "Entwicklertools erkannt",
+      "devtoolsMessage": "Der Zugriff auf Entwicklertools wurde erkannt. Diese Aktion wurde aus Sicherheitsgründen protokolliert.",
+      "screenshotTitle": "Screenshot-Versuch erkannt",
+      "screenshotMessage": "Ein Screenshot-Versuch wurde erkannt. Diese Galerie ist vor unbefugtem Kopieren geschützt.",
+      "violationTitle": "Schutzverletzung",
+      "violationMessage": "Eine unbefugte Aktion wurde erkannt und blockiert.",
+      "noticeTitle": "Sicherheitshinweis",
+      "noticeMessage": "Dieser Inhalt ist geschützt. Unbefugte Zugriffsversuche werden überwacht."
+    },
+    "party": "Party",
+    "dateFormatEuropean": "TT/MM/JJJJ (Europäisch)",
+    "dateFormatUS": "MM/TT/JJJJ (USA)",
+    "dateFormatISO": "JJJJ-MM-TT (ISO)",
+    "dateFormatGerman": "TT.MM.JJJJ (Deutsch)",
+    "skipToContent": "Zum Hauptinhalt springen",
+    "selectPhoto": "{{filename}} auswählen",
+    "ratingValue": "Bewertung: {{value}}",
+    "commentsCount_one": "{{count}} Kommentar",
+    "commentsCount_other": "{{count}} Kommentare",
+    "errorLoadingImage": "Fehler beim Laden von {{alt}}",
+    "photoFeedbackCount": "Foto-Feedback ({{count}} Kommentare)",
+    "footerPlaceholder": "© {{year}} Ihre Firma. Alle Rechte vorbehalten.",
+    "liked": "Gefällt mir",
+    "rated": "Bewertet",
+    "commented": "Kommentiert",
+    "comment": "Kommentieren",
+    "like": "Gefällt mir",
+    "unlike": "Gefällt mir nicht mehr",
+    "unlikePhoto": "Foto nicht mehr liken",
+    "removeRating": "Bewertung entfernen",
+    "rateStars_one": "Mit {{count}} Stern bewerten",
+    "rateStars_other": "Mit {{count}} Sternen bewerten",
+    "rateN": "{{count}} bewerten",
+    "play": "Abspielen",
+    "pause": "Pause",
+    "mute": "Stummschalten",
+    "unmute": "Ton einschalten",
+    "fullscreen": "Vollbild",
+    "exitFullscreen": "Vollbild beenden",
+    "playSlideshow": "Diashow abspielen",
+    "pauseSlideshow": "Diashow pausieren",
+    "hiddenFromGuests": "Für Gäste ausgeblendet",
+    "visibleToGuests": "Für Gäste sichtbar",
+    "loading": "Wird geladen",
+    "heroImage": "Titelbild",
+    "logo": "Logo",
+    "notificationsRegion": "Benachrichtigungen Alt+T",
+    "themes": {
+      "default": {
+        "name": "Klassisches Raster",
+        "description": "Klares, aufgeräumtes Rasterlayout"
+      },
+      "elegantWedding": {
+        "name": "Elegante Hochzeit",
+        "description": "Edles Layout mit Titelbild und Zeitleiste"
+      },
+      "modernMasonry": {
+        "name": "Modernes Mauerwerk",
+        "description": "Spalten wie bei Pinterest oder Zeilen wie bei Google Fotos"
+      },
+      "birthdayFun": {
+        "name": "Geburtstagsfeier",
+        "description": "Lebhaftes Karussell mit verspielten Animationen"
+      },
+      "corporateTimeline": {
+        "name": "Unternehmens-Zeitleiste",
+        "description": "Professionelles chronologisches Layout"
+      },
+      "artisticMosaic": {
+        "name": "Künstlerisches Mosaik",
+        "description": "Kreatives Layout mit unterschiedlichen Fotogrößen"
+      },
+      "darkClassic": {
+        "name": "Dunkel klassisch",
+        "description": "Dunkles Theme mit grünen Akzenten"
+      },
+      "darkElegant": {
+        "name": "Dunkel elegant",
+        "description": "Dunkles Theme mit goldenen Akzenten"
+      },
+      "darkModern": {
+        "name": "Dunkel modern",
+        "description": "Dunkles Theme mit blauen Akzenten"
+      },
+      "galleryPremium": {
+        "name": "Gallery Premium (Beta)",
+        "description": "Helles Theme mit eleganter Serifenschrift und Mauerwerk-Raster"
+      },
+      "galleryStory": {
+        "name": "Gallery Story (Beta)",
+        "description": "Dunkles, filmisches Theme mit goldenen Akzenten und Szenen-Abschnitten"
+      }
+    },
+    "layouts": {
+      "grid": "Raster",
+      "masonry": "Mauerwerk",
+      "carousel": "Karussell",
+      "timeline": "Zeitleiste",
+      "mosaic": "Mosaik",
+      "gallery-premium": "Gallery Premium",
+      "gallery-story": "Gallery Story"
+    },
+    "galleryLayoutLabel": "Galerie-Layout",
+    "yourStudio": "Ihr Studio",
+    "photoSharing": "Foto-Sharing",
+    "photoSharingPlatform": "Plattform zum Teilen von Fotos",
+    "betaTooltip": "Beta — Funktion ist nutzbar, wird aber weiterentwickelt",
+    "backToHome": "← Zur Startseite",
+    "pageNotFoundBody": "Die gesuchte Seite existiert nicht.",
+    "goToHomepage": "Zur Startseite",
+    "welcomeMessageTip": "Tipp: Mit Enter beginnen Sie eine neue Zeile. Jede Zeile erscheint in E-Mails als eigener Absatz.",
+    "customCssPlaceholder": "/* Eigenes CSS hier einfügen */",
+    "enterCustomCssPlaceholder": "/* Eigenes CSS hier eingeben */",
+    "betaBadge": "(Beta)"
   }
 }

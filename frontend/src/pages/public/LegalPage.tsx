@@ -35,7 +35,7 @@ const sanitizeExternalUrl = (url: string): string | null => {
 
 export const LegalPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   
   // Extract page slug from pathname if not in params (for static routes like /impressum)
@@ -94,16 +94,16 @@ export const LegalPage: React.FC = () => {
       <div className="min-h-screen bg-neutral-50 flex items-center justify-center">
         <Card className="max-w-md w-full mx-4">
           <div className="text-center py-12 px-6">
-            <h2 className="text-xl font-semibold text-neutral-900 mb-2">Page Not Found</h2>
+            <h2 className="text-xl font-semibold text-neutral-900 mb-2">{t('ui.pageNotFound', 'Page Not Found')}</h2>
             <p className="text-neutral-600 mb-6">
-              The page you're looking for doesn't exist.
+              {t('ui.pageNotFoundBody', "The page you're looking for doesn't exist.")}
             </p>
             <Link
               to="/"
               className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700"
             >
               <Home className="w-4 h-4" />
-              Go to Homepage
+              {t('ui.goToHomepage', 'Go to Homepage')}
             </Link>
           </div>
         </Card>
@@ -121,7 +121,7 @@ export const LegalPage: React.FC = () => {
             className="inline-flex items-center gap-2 text-neutral-600 hover:text-neutral-900 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            {i18n.language === 'de' ? 'Zurück' : 'Back'}
+            {t('common.back')}
           </button>
         </div>
       </header>

@@ -5,16 +5,48 @@ import HttpBackend from 'i18next-http-backend';
 
 const localeFiles = import.meta.glob<Record<string, string>>('./locales/*.json', { eager: true, import: 'default' });
 
-const resources = Object.fromEntries(
+// Locale overlays (e.g. locales-ptbr/pt.json) are deep-merged over the
+// upstream catalog of the same language. Keeping them in a separate file lets
+// the upstream locale be updated without merge conflicts, while the overlay
+// completes and corrects it. Overlay values win.
+const overlayFiles = import.meta.glob<Record<string, unknown>>('./locales-*/*.json', { eager: true, import: 'default' });
+
+type Catalog = Record<string, unknown>;
+const isObject = (v: unknown): v is Catalog => !!v && typeof v === 'object' && !Array.isArray(v);
+const deepMerge = (base: Catalog, overlay: Catalog): Catalog => {
+  const out: Catalog = { ...base };
+  for (const [key, value] of Object.entries(overlay)) {
+    out[key] = isObject(value) && isObject(out[key]) ? deepMerge(out[key] as Catalog, value) : value;
+  }
+  return out;
+};
+
+const resources: Record<string, { translation: Catalog }> = Object.fromEntries(
   Object.entries(localeFiles).map(([path, translations]) => {
     const lang = path.match(/\/(\w+)\.json$/)?.[1];
     return [lang, { translation: translations }];
   })
 );
 
+for (const [path, overlay] of Object.entries(overlayFiles)) {
+  const lang = path.match(/\/(\w+)\.json$/)?.[1];
+  if (!lang) continue;
+  resources[lang] = { translation: deepMerge(resources[lang]?.translation ?? {}, overlay) };
+}
+
+// Optional installation default (build-time), e.g. VITE_DEFAULT_LANGUAGE=pt.
+// It is consulted after an explicit user choice (localStorage/cookie) and
+// before the browser language, so a visitor's own selection always wins.
+const defaultLanguage = (import.meta.env.VITE_DEFAULT_LANGUAGE as string | undefined)?.trim();
+const detector = new LanguageDetector();
+detector.addDetector({
+  name: 'installDefault',
+  lookup: () => (defaultLanguage && defaultLanguage in resources ? defaultLanguage : undefined),
+});
+
 i18n
   .use(HttpBackend)
-  .use(LanguageDetector)
+  .use(detector)
   .use(initReactI18next)
   .init({
     fallbackLng: 'en',
@@ -38,8 +70,12 @@ i18n
     compatibilityJSON: 'v4',
 
     detection: {
-      order: ['localStorage', 'cookie', 'navigator', 'htmlTag'],
+      order: ['localStorage', 'cookie', 'installDefault', 'navigator', 'htmlTag'],
       caches: ['localStorage', 'cookie'],
+      // Browsers report regional tags (pt-BR, de-DE). The catalogs and the
+      // language selectors are keyed by base code, so normalise detected
+      // values to it; otherwise a pt-BR browser shows the selector as English.
+      convertDetectedLanguage: (lng: string) => lng.split('-')[0],
     },
   });
 

@@ -144,8 +144,8 @@ async function persistSignatureImage(contract, role, dataUrl) {
  */
 function buildSignatureStamps(contract) {
   const locale = contract.language || 'de';
-  const nameLabel = 'Name';
-  const dateLabel = locale === 'de' ? 'Datum' : 'Date';
+  const nameLabel = locale === 'pt' ? 'Nome' : 'Name';
+  const dateLabel = locale === 'de' ? 'Datum' : locale === 'pt' ? 'Data' : 'Date';
   const stamps = [];
   if (contract.signed_customer_signature_path) {
     stamps.push({

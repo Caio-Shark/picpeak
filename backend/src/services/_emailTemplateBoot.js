@@ -32,6 +32,10 @@
 const { ensureCrmEmailTemplatesSeeded } = require('./crmEmailTemplates');
 const { ensureContractEmailTemplatesSeeded } = require('./contractEmailTemplates');
 const { ensureEventReminderTemplatesSeeded } = require('./eventReminderTemplates');
+// Local pt-BR installation: runs last so it can translate the templates the
+// three seeders above may have just created. Insert-only; returns [].
+const { ensurePtBrEmailTemplatesSeeded } = require('./ptbrEmailTemplates');
+const { ensurePtBrDefaultDataLocalized } = require('./ptbrDefaultData');
 const { PROTECTED_PENDING_STATUS } = require('../utils/emailQueueEncryption');
 
 /**
@@ -55,6 +59,8 @@ async function seedEmailTemplatesAndRecoverQueue(db, logger) {
     ensureCrmEmailTemplatesSeeded,
     ensureContractEmailTemplatesSeeded,
     ensureEventReminderTemplatesSeeded,
+    ensurePtBrEmailTemplatesSeeded,
+    ensurePtBrDefaultDataLocalized,
   ]) {
     try {
       const inserted = await seedFn(db, log);

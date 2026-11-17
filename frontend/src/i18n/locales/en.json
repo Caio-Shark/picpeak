@@ -866,7 +866,8 @@
     "replacedFiles_other": "{{count}} photos replaced",
     "uploadingChunks_one": "{{count}} chunk uploading",
     "uploadingChunks_other": "{{count}} chunks uploading",
-    "fileTooLarge": "File too large: {{name}} (max {{limit}}MB)"
+    "fileTooLarge": "File too large: {{name}} (max {{limit}}MB)",
+    "largeFileReplaceSkipped": "Replace-by-name is not supported for files above the batch size; upload it without replace."
   },
   "navigation": {
     "dashboard": "Dashboard",
@@ -2531,6 +2532,11 @@
         "title": "People in galleries",
         "description": "Group each gallery's photos by the people in them, so guests can find themselves in two taps and download just their own photos. Runs entirely on your own server in a separate, optional container — nothing is sent anywhere. Detected faces are personal data, so this stays off until you enable it per gallery too.",
         "lockedSingleContainer": "Not available on the all-in-one image. Face detection needs a separate ML container and competes with image processing for the same CPU and memory, which would slow the whole install down."
+      },
+      "newsletters": {
+        "title": "Newsletters",
+        "sidebar": "Newsletters",
+        "description": "Send a marketing campaign to your customer accounts. Compose the body with the rich-text editor, preview it, send yourself a test, then queue it — sends are spread over time so your mail provider does not rate-limit you. Every customer can be opted out individually, opted-out customers are skipped automatically, and every campaign carries an unsubscribe link. Emails about galleries, quotes and invoices are never affected."
       }
     },
     "customerSurface": {
@@ -7120,6 +7126,9 @@
     },
     "crm_overview_show_invoices": {
       "label": "Invoices pipeline (per-status)"
+    },
+    "crm_invoices_late_fee_vat_enabled": {
+      "label": "Charge VAT on late fees (Switzerland — leave off for DE/AT; no effect if your organisation has no VAT rate)"
     }
   },
   "quoteResponse": {
@@ -7855,5 +7864,173 @@
       "codeFormat": "Enter the 6-digit code from the email.",
       "generic": "Something went wrong. Please try again."
     }
+  },
+  "ui": {
+    "failedToLoad": "Failed to load",
+    "failedToLoadMedia": "Failed to load media",
+    "failedToLoadImage": "Failed to load image",
+    "imageUnavailable": "Image unavailable",
+    "galleryPreview": "Gallery preview",
+    "emailPreview": "Email Preview",
+    "themePreview": "Theme Preview",
+    "themePreviewDescription": "This is how your galleries will look with the current theme settings",
+    "pageNotFound": "Page Not Found",
+    "photoFeedback": "Photo Feedback",
+    "noFeedbackForPhoto": "No feedback for this photo yet.",
+    "photoDeleted": "Photo deleted successfully",
+    "photoDeleteFailed": "Failed to delete photo",
+    "photosDeleteFailed": "Failed to delete photos",
+    "photoDownloaded": "Photo downloaded successfully",
+    "photoDownloadFailed": "Failed to download photo",
+    "photosDownloadFailed": "Failed to download photos",
+    "photoSaveFailed": "Failed to save photo",
+    "downloadStarted": "Download started",
+    "categoryUpdated": "Category updated",
+    "categoryUpdateFailed": "Failed to update category",
+    "confirmDeletePhoto": "Are you sure you want to delete \"{{filename}}\"?",
+    "confirmDeletePhotos_one": "Are you sure you want to delete {{count}} photo?",
+    "confirmDeletePhotos_other": "Are you sure you want to delete {{count}} photos?",
+    "confirmDeleteComment": "Are you sure you want to delete this comment?",
+    "unsavedChangesPrompt": "You have unsaved changes. Do you want to save them?",
+    "invalidFileType": "Invalid file type: {{name}}",
+    "closeSidebar": "Close sidebar",
+    "closeWarning": "Close warning",
+    "scrollToGallery": "Scroll to gallery",
+    "scrollToTop": "Scroll to top",
+    "previousPhoto": "Previous photo",
+    "nextPhoto": "Next photo",
+    "viewFullscreen": "View fullscreen",
+    "viewFullSize": "View full size",
+    "downloadPhoto": "Download photo",
+    "likePhoto": "Like photo",
+    "commentOnPhoto": "Comment on photo",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "fitToScreen": "Fit to screen",
+    "ratePhoto": "Rate photo",
+    "toggleFeedback": "Toggle feedback",
+    "closeFeedback": "Close feedback",
+    "eventLogo": "Event logo",
+    "darkLogo": "Dark logo",
+    "lineBreaksPreserved": "Line breaks will be preserved in emails",
+    "noDivider": "No divider",
+    "analyticsDashboard": "Analytics dashboard",
+    "photosDeleted_one": "{{count}} photo deleted successfully",
+    "photosDeleted_other": "{{count}} photos deleted successfully",
+    "protection": {
+      "devtoolsTitle": "Developer Tools Detected",
+      "devtoolsMessage": "Developer tools access has been detected. This action has been logged for security purposes.",
+      "screenshotTitle": "Screenshot Attempt Detected",
+      "screenshotMessage": "A screenshot attempt has been detected. This gallery is protected from unauthorized copying.",
+      "violationTitle": "Protection Violation",
+      "violationMessage": "An unauthorized action has been detected and blocked.",
+      "noticeTitle": "Security Notice",
+      "noticeMessage": "This content is protected. Unauthorized access attempts are monitored."
+    },
+    "party": "Party",
+    "dateFormatEuropean": "DD/MM/YYYY (European)",
+    "dateFormatUS": "MM/DD/YYYY (US)",
+    "dateFormatISO": "YYYY-MM-DD (ISO)",
+    "dateFormatGerman": "DD.MM.YYYY (German)",
+    "skipToContent": "Skip to main content",
+    "selectPhoto": "Select {{filename}}",
+    "ratingValue": "Rating: {{value}}",
+    "commentsCount_one": "{{count}} comment",
+    "commentsCount_other": "{{count}} comments",
+    "errorLoadingImage": "Error loading {{alt}}",
+    "photoFeedbackCount": "Photo feedback ({{count}} comments)",
+    "footerPlaceholder": "© {{year}} Your Company. All rights reserved.",
+    "liked": "Liked",
+    "rated": "Rated",
+    "commented": "Commented",
+    "comment": "Comment",
+    "like": "Like",
+    "unlike": "Unlike",
+    "unlikePhoto": "Unlike photo",
+    "removeRating": "Remove rating",
+    "rateStars_one": "Rate {{count}} star",
+    "rateStars_other": "Rate {{count}} stars",
+    "rateN": "Rate {{count}}",
+    "play": "Play",
+    "pause": "Pause",
+    "mute": "Mute",
+    "unmute": "Unmute",
+    "fullscreen": "Fullscreen",
+    "exitFullscreen": "Exit fullscreen",
+    "playSlideshow": "Play slideshow",
+    "pauseSlideshow": "Pause slideshow",
+    "hiddenFromGuests": "Hidden from guests",
+    "visibleToGuests": "Visible to guests",
+    "loading": "Loading",
+    "heroImage": "Hero",
+    "logo": "Logo",
+    "notificationsRegion": "Notifications Alt+T",
+    "themes": {
+      "default": {
+        "name": "Classic Grid",
+        "description": "Clean and organized grid layout"
+      },
+      "elegantWedding": {
+        "name": "Elegant Wedding",
+        "description": "Sophisticated layout with hero image and timeline"
+      },
+      "modernMasonry": {
+        "name": "Modern Masonry",
+        "description": "Pinterest-style columns or Google Photos-style rows"
+      },
+      "birthdayFun": {
+        "name": "Birthday Celebration",
+        "description": "Vibrant carousel with playful animations"
+      },
+      "corporateTimeline": {
+        "name": "Corporate Timeline",
+        "description": "Professional chronological layout"
+      },
+      "artisticMosaic": {
+        "name": "Artistic Mosaic",
+        "description": "Creative layout with varied photo sizes"
+      },
+      "darkClassic": {
+        "name": "Dark Classic",
+        "description": "Dark theme with green accents"
+      },
+      "darkElegant": {
+        "name": "Dark Elegant",
+        "description": "Dark theme with gold accents"
+      },
+      "darkModern": {
+        "name": "Dark Modern",
+        "description": "Dark theme with blue accents"
+      },
+      "galleryPremium": {
+        "name": "Gallery Premium (Beta)",
+        "description": "Clean light theme with elegant serif typography and masonry grid"
+      },
+      "galleryStory": {
+        "name": "Gallery Story (Beta)",
+        "description": "Dark cinematic theme with gold accents and scene-based sections"
+      }
+    },
+    "layouts": {
+      "grid": "Grid",
+      "masonry": "Masonry",
+      "carousel": "Carousel",
+      "timeline": "Timeline",
+      "mosaic": "Mosaic",
+      "gallery-premium": "Gallery Premium",
+      "gallery-story": "Gallery Story"
+    },
+    "galleryLayoutLabel": "Gallery Layout",
+    "yourStudio": "Your Studio",
+    "photoSharing": "Photo Sharing",
+    "photoSharingPlatform": "Photo Sharing Platform",
+    "betaTooltip": "Beta — feature is functional but still evolving",
+    "backToHome": "← Back to home",
+    "pageNotFoundBody": "The page you're looking for doesn't exist.",
+    "goToHomepage": "Go to Homepage",
+    "welcomeMessageTip": "Tip: Press Enter to create a new line. Each line will appear as a separate paragraph in emails.",
+    "customCssPlaceholder": "/* Add custom CSS here */",
+    "enterCustomCssPlaceholder": "/* Enter your custom CSS here */",
+    "betaBadge": "(Beta)"
   }
 }

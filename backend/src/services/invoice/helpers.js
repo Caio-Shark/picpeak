@@ -259,12 +259,13 @@ async function resolveIntlLocale(docLocale) {
     const businessProfileService = require('../businessProfileService');
     const profile = (await businessProfileService.getProfile()).profile || {};
     const cc = (profile.country_code || '').toUpperCase();
-    if (['CH', 'LI', 'DE', 'AT'].includes(cc)) {
-      _cachedIntlLocale = 'de-CH';
+    const byCountry = require('../../utils/docIntlLocale').intlLocaleForCountry(cc);
+    if (byCountry) {
+      _cachedIntlLocale = byCountry;
       return _cachedIntlLocale;
     }
   } catch (_) { /* fall through to per-locale default */ }
-  return docLocale === 'de' ? 'de-CH' : 'en-GB';
+  return require('../../utils/docIntlLocale').intlLocaleFor(docLocale);
 }
 
 function formatMajor(minor, currency, locale) {
@@ -274,7 +275,7 @@ function formatMajor(minor, currency, locale) {
   // fall through to the legacy de-vs-en split; the cache fills after
   // the first send and every subsequent send uses the correct locale.
   const cached = _cachedIntlLocale;
-  const intlLocale = cached || (locale === 'de' ? 'de-CH' : 'en-GB');
+  const intlLocale = cached || require('../../utils/docIntlLocale').intlLocaleFor(locale);
   // Best-effort warm-up — fire and forget; the next call hits cache.
   if (!cached) {
     resolveIntlLocale(locale).catch(() => { /* tolerate */ });

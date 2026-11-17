@@ -700,7 +700,7 @@ function formatVatRate(rate, locale) {
   // 7.7 → "7.7 %" in en, "7,7 %" in de. Two decimals stripped for
   // tidiness when zero (8.10 → "8.1 %").
   const n = Number(rate || 0);
-  const intlLocale = locale === 'de' ? 'de-CH' : 'en-GB';
+  const intlLocale = require('../utils/docIntlLocale').intlLocaleFor(locale);
   const formatted = new Intl.NumberFormat(intlLocale, {
     minimumFractionDigits: 0, maximumFractionDigits: 2,
   }).format(n);
@@ -708,7 +708,7 @@ function formatVatRate(rate, locale) {
 }
 
 function rowCellValues(row, idx, locale, dateFormat, currency) {
-  const intlLocale = locale === 'de' ? 'de-CH' : 'en-GB';
+  const intlLocale = require('../utils/docIntlLocale').intlLocaleFor(locale);
   const typeLabel = t(
     locale,
     row.type === 'outgoing' ? 'tax_type_outgoing'
@@ -768,7 +768,7 @@ async function renderTaxReportPdf({ from, to, currency, locale, scope } = {}) {
   const showResult = xScope === 'all';
   const renderCtx = await loadRenderContext(locale);
   const useLocale = renderCtx.locale;
-  const intlLocale = useLocale === 'de' ? 'de-CH' : 'en-GB';
+  const intlLocale = require('../utils/docIntlLocale').intlLocaleFor(useLocale);
 
   const { doc, page, fonts } = pdfService.createBaseDocument({
     orientation: 'landscape',

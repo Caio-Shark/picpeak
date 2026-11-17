@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Shield, AlertTriangle, X } from 'lucide-react';
 
 interface ProtectionWarningProps {
@@ -18,6 +19,7 @@ export const ProtectionWarning: React.FC<ProtectionWarningProps> = ({
   autoClose = false,
   autoCloseDelay = 5000
 }) => {
+  const { t } = useTranslation();
   // Auto close functionality
   React.useEffect(() => {
     if (autoClose && autoCloseDelay > 0 && onClose) {
@@ -34,32 +36,32 @@ export const ProtectionWarning: React.FC<ProtectionWarningProps> = ({
       case 'devtools':
         return {
           icon: <AlertTriangle className="w-5 h-5" />,
-          title: 'Developer Tools Detected',
-          defaultMessage: 'Developer tools access has been detected. This action has been logged for security purposes.',
+          title: t('ui.protection.devtoolsTitle', 'Developer Tools Detected'),
+          defaultMessage: t('ui.protection.devtoolsMessage', 'Developer tools access has been detected. This action has been logged for security purposes.'),
           bgColor: 'bg-red-500',
           textColor: 'text-white'
         };
       case 'screenshot':
         return {
           icon: <Shield className="w-5 h-5" />,
-          title: 'Screenshot Attempt Detected',
-          defaultMessage: 'A screenshot attempt has been detected. This gallery is protected from unauthorized copying.',
+          title: t('ui.protection.screenshotTitle', 'Screenshot Attempt Detected'),
+          defaultMessage: t('ui.protection.screenshotMessage', 'A screenshot attempt has been detected. This gallery is protected from unauthorized copying.'),
           bgColor: 'bg-orange-500',
           textColor: 'text-white'
         };
       case 'violation':
         return {
           icon: <Shield className="w-5 h-5" />,
-          title: 'Protection Violation',
-          defaultMessage: 'An unauthorized action has been detected and blocked.',
+          title: t('ui.protection.violationTitle', 'Protection Violation'),
+          defaultMessage: t('ui.protection.violationMessage', 'An unauthorized action has been detected and blocked.'),
           bgColor: severity === 'high' ? 'bg-red-500' : severity === 'medium' ? 'bg-orange-500' : 'bg-yellow-500',
           textColor: 'text-white'
         };
       default:
         return {
           icon: <Shield className="w-5 h-5" />,
-          title: 'Security Notice',
-          defaultMessage: 'This content is protected. Unauthorized access attempts are monitored.',
+          title: t('ui.protection.noticeTitle', 'Security Notice'),
+          defaultMessage: t('ui.protection.noticeMessage', 'This content is protected. Unauthorized access attempts are monitored.'),
           bgColor: 'bg-blue-500',
           textColor: 'text-white'
         };
@@ -86,7 +88,7 @@ export const ProtectionWarning: React.FC<ProtectionWarningProps> = ({
           <button
             onClick={onClose}
             className="flex-shrink-0 ml-2 -mr-1 -mt-1 p-1 rounded-full hover:bg-white/20 transition-colors"
-            aria-label="Close warning"
+            aria-label={t('ui.closeWarning', 'Close warning')}
           >
             <X className="w-4 h-4" />
           </button>

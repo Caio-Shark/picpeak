@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
+import { tr } from '../../../utils/tr';
 import { MessageSquare, Star, Heart, Video, ChevronDown, Calendar, Clock } from 'lucide-react';
 import { parseISO } from 'date-fns';
 import { useTranslation } from 'react-i18next';
@@ -154,7 +155,7 @@ const JustifiedPhoto: React.FC<JustifiedPhotoProps> = ({
           {(likeCount > 0 || liked) && (
             <span
               className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/90 backdrop-blur-sm"
-              title="Liked"
+              title={tr('ui.liked', 'Liked')}
             >
               <Heart className="w-3.5 h-3.5 text-red-500" fill="currentColor" />
             </span>
@@ -162,7 +163,7 @@ const JustifiedPhoto: React.FC<JustifiedPhotoProps> = ({
           {averageRating > 0 && (
             <span
               className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/90 backdrop-blur-sm"
-              title="Rated"
+              title={tr('ui.rated', 'Rated')}
             >
               <Star className="w-3.5 h-3.5 text-yellow-500" fill="currentColor" />
             </span>
@@ -170,7 +171,7 @@ const JustifiedPhoto: React.FC<JustifiedPhotoProps> = ({
           {commentCount > 0 && (
             <span
               className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/90 backdrop-blur-sm"
-              title="Commented"
+              title={tr('ui.commented', 'Commented')}
             >
               <MessageSquare className="w-3.5 h-3.5 text-accent" fill="currentColor" />
             </span>
@@ -408,7 +409,7 @@ export const JustifiedGalleryLayout: React.FC<JustifiedGalleryLayoutProps> = ({
                   <div className="mb-6">
                     <img
                       src={buildResourceUrl(eventLogo)}
-                      alt="Event logo"
+                      alt={t('ui.eventLogo', 'Event logo')}
                       className={`${getLogoSizeClasses(heroLogoSize)} mx-auto`}
                       style={{
                         filter: 'drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5))'
@@ -429,7 +430,7 @@ export const JustifiedGalleryLayout: React.FC<JustifiedGalleryLayoutProps> = ({
                   <div className="my-6">
                     <img
                       src={buildResourceUrl(eventLogo)}
-                      alt="Event logo"
+                      alt={t('ui.eventLogo', 'Event logo')}
                       className={`${getLogoSizeClasses(heroLogoSize)} mx-auto`}
                       style={{
                         filter: 'drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5))'
@@ -461,7 +462,7 @@ export const JustifiedGalleryLayout: React.FC<JustifiedGalleryLayoutProps> = ({
                   <div className="mt-6">
                     <img
                       src={buildResourceUrl(eventLogo)}
-                      alt="Event logo"
+                      alt={t('ui.eventLogo', 'Event logo')}
                       className={`${getLogoSizeClasses(heroLogoSize)} mx-auto`}
                       style={{
                         filter: 'drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5))'
@@ -483,7 +484,7 @@ export const JustifiedGalleryLayout: React.FC<JustifiedGalleryLayoutProps> = ({
                 }
               }}
               className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce cursor-pointer hover:scale-110 transition-transform focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 rounded-full p-2"
-              aria-label="Scroll to gallery"
+              aria-label={t('ui.scrollToGallery', 'Scroll to gallery')}
             >
               <ChevronDown className="w-8 h-8 text-white drop-shadow-lg" />
             </button>

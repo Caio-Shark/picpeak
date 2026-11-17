@@ -86,14 +86,14 @@ const AdminPhotoViewerContent: React.FC<ViewerContentProps> = ({
   };
 
   const handleDelete = async () => {
-    if (!confirm(`Are you sure you want to delete "${currentPhoto.filename}"?`)) {
+    if (!confirm(t('ui.confirmDeletePhoto', { defaultValue: 'Are you sure you want to delete \"{{filename}}\"?', filename: currentPhoto.filename }))) {
       return;
     }
 
     setIsDeleting(true);
     try {
       await photosService.deletePhoto(eventId, currentPhoto.id);
-      toast.success('Photo deleted successfully');
+      toast.success(t('ui.photoDeleted', 'Photo deleted successfully'));
       
       // Close viewer if this was the last photo
       if (photos.length === 1) {
@@ -107,7 +107,7 @@ const AdminPhotoViewerContent: React.FC<ViewerContentProps> = ({
       
       onPhotoDeleted();
     } catch (error) {
-      toast.error('Failed to delete photo');
+      toast.error(t('ui.photoDeleteFailed', 'Failed to delete photo'));
     } finally {
       setIsDeleting(false);
     }
@@ -116,16 +116,16 @@ const AdminPhotoViewerContent: React.FC<ViewerContentProps> = ({
   const handleDownload = async () => {
     try {
       await photosService.downloadPhoto(eventId, currentPhoto.id, currentPhoto.filename);
-      toast.success('Download started');
+      toast.success(t('ui.downloadStarted', 'Download started'));
     } catch (error) {
-      toast.error('Failed to download photo');
+      toast.error(t('ui.photoDownloadFailed', 'Failed to download photo'));
     }
   };
 
   const handleCategoryChange = async (categoryId: number | null) => {
     try {
       await photosService.updatePhotoCategory(eventId, currentPhoto.id, categoryId);
-      toast.success('Category updated');
+      toast.success(t('ui.categoryUpdated', 'Category updated'));
       categoryMenuModal.close();
       // Invalidate photos query to refresh data
       await queryClient.invalidateQueries({ queryKey: ['admin-event-photos', eventId.toString()] });
@@ -133,7 +133,7 @@ const AdminPhotoViewerContent: React.FC<ViewerContentProps> = ({
       // Also trigger the parent's refresh callback
       onPhotoDeleted();
     } catch (error) {
-      toast.error('Failed to update category');
+      toast.error(t('ui.categoryUpdateFailed', 'Failed to update category'));
     }
   };
 
@@ -273,7 +273,7 @@ const AdminPhotoViewerContent: React.FC<ViewerContentProps> = ({
                 <div className="flex items-center justify-center text-neutral-400">
                   <div className="text-center">
                     <Eye className="w-12 h-12 mx-auto mb-2" />
-                    <p className="text-sm">Failed to load media</p>
+                    <p className="text-sm">{t('ui.failedToLoadMedia', 'Failed to load media')}</p>
                   </div>
                 </div>
               }
@@ -287,7 +287,7 @@ const AdminPhotoViewerContent: React.FC<ViewerContentProps> = ({
                 <div className="flex items-center justify-center text-neutral-400">
                   <div className="text-center">
                     <Eye className="w-12 h-12 mx-auto mb-2" />
-                    <p className="text-sm">Failed to load image</p>
+                    <p className="text-sm">{t('ui.failedToLoadImage', 'Failed to load image')}</p>
                   </div>
                 </div>
               }
@@ -488,7 +488,7 @@ const AdminPhotoViewerContent: React.FC<ViewerContentProps> = ({
                       <Star className="w-4 h-4" fill="currentColor" />
                       <span className="text-white font-medium">{Number(averageRating).toFixed(1)}</span>
                     </div>
-                    <p className="text-xs text-neutral-400">Avg Rating</p>
+                    <p className="text-xs text-neutral-400">{t('feedback.avgRating')}</p>
                   </div>
                 )}
                 
@@ -617,7 +617,7 @@ const AdminPhotoViewerContent: React.FC<ViewerContentProps> = ({
                               
                               <button
                                 onClick={() => {
-                                  if (confirm('Are you sure you want to delete this comment?')) {
+                                  if (confirm(t('ui.confirmDeleteComment', 'Are you sure you want to delete this comment?'))) {
                                     deleteFeedbackMutation.mutate(comment.id.toString());
                                   }
                                 }}
@@ -636,7 +636,7 @@ const AdminPhotoViewerContent: React.FC<ViewerContentProps> = ({
               
               {/* No feedback message */}
               {comments.length === 0 && (
-                <p className="text-neutral-400 text-sm">No feedback for this photo yet.</p>
+                <p className="text-neutral-400 text-sm">{t('ui.noFeedbackForPhoto', 'No feedback for this photo yet.')}</p>
               )}
             </div>
           )}

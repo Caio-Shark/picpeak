@@ -344,7 +344,7 @@ export const ContractResponseView: React.FC<{ adapter: ContractDocumentAdapter }
             return logo ? (
               <img
                 src={logo}
-                alt={c.issuer?.companyName || 'Logo'}
+                alt={c.issuer?.companyName || t('ui.logo', 'Logo')}
                 className="mx-auto mb-3 h-16 object-contain"
               />
             ) : null;

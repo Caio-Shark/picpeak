@@ -19,6 +19,7 @@ import type { Event } from '../../../types';
 import { Button, Card } from '../../../components/common';
 import { PermissionGate } from '../../../components/admin/PermissionGate';
 import { useLocalizedDate } from '../../../hooks/useLocalizedDate';
+import { useEventTypeName } from '../../../hooks/useEventTypeName';
 import { useFeatureFlags } from '../../../contexts/FeatureFlagsContext';
 import { buildShareLinkUrl } from '../../../utils/url';
 import { isGalleryPublic } from '../../../utils/accessControl';
@@ -62,6 +63,7 @@ export const EventDetailsHeader: React.FC<EventDetailsHeaderProps> = ({
 }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const eventTypeName = useEventTypeName();
   const { format } = useLocalizedDate();
   const { flags } = useFeatureFlags();
 
@@ -89,7 +91,7 @@ export const EventDetailsHeader: React.FC<EventDetailsHeaderProps> = ({
                   {format(safeParseDate(event.event_date)!, 'PPP')}
                 </span>
               )}
-              <span className="capitalize">{event.event_type}</span>
+              <span className="capitalize">{eventTypeName(event.event_type)}</span>
               <span
                 className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium ${
                   isGalleryPublic(event.require_password)

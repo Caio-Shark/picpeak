@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo, useCallback, useRef } from 'react';
+import { tr } from '../../../utils/tr';
 import { createPortal } from 'react-dom';
 import { MasonryPhotoAlbum } from 'react-photo-album';
 import 'react-photo-album/masonry.css';
@@ -161,17 +162,17 @@ const PhotoCard: React.FC<PhotoCardProps> = ({
       {feedbackEnabled && (likeCount > 0 || averageRating > 0 || commentCount > 0 || isLiked) && (
         <div className="gallery-premium-feedback">
           {(likeCount > 0 || isLiked) && (
-            <span className="gallery-premium-feedback-indicator" title="Liked">
+            <span className="gallery-premium-feedback-indicator" title={tr('ui.liked', 'Liked')}>
               <Heart className="w-3.5 h-3.5 text-red-500" fill="currentColor" />
             </span>
           )}
           {averageRating > 0 && (
-            <span className="gallery-premium-feedback-indicator" title="Rated">
+            <span className="gallery-premium-feedback-indicator" title={tr('ui.rated', 'Rated')}>
               <Star className="w-3.5 h-3.5 text-yellow-500" fill="currentColor" />
             </span>
           )}
           {commentCount > 0 && (
-            <span className="gallery-premium-feedback-indicator" title="Commented">
+            <span className="gallery-premium-feedback-indicator" title={tr('ui.commented', 'Commented')}>
               <MessageSquare className="w-3.5 h-3.5 text-blue-500" fill="currentColor" />
             </span>
           )}

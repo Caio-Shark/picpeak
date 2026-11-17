@@ -90,7 +90,7 @@ export const UserPhotoUpload: React.FC<UserPhotoUploadProps> = ({
   const addFiles = (incoming: File[]) => {
     const validFiles = incoming.filter((file) => {
       if (!allowedMimeTypes.includes(normalizeFileMimeType(file.name, file.type))) {
-        toast.error(`Invalid file type: ${file.name}`);
+        toast.error(t('ui.invalidFileType', { defaultValue: 'Invalid file type: {{name}}', name: file.name }));
         return false;
       }
       // Check file size against the configured per-file limit for its type.

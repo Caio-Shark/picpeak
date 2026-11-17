@@ -132,7 +132,7 @@ const { getAbsoluteFrontendUrl } = require('../utils/frontendUrl');
 const DEV_TEST_DIR = () => path.join(getStoragePath(), 'business-docs', 'dev-test');
 
 function fakeMoney(major, currency, locale = 'de') {
-  return new Intl.NumberFormat(locale === 'de' ? 'de-CH' : 'en-GB', {
+  return new Intl.NumberFormat(require('../utils/docIntlLocale').intlLocaleFor(locale), {
     style: 'currency', currency: (currency || 'CHF').toUpperCase(),
   }).format(major);
 }

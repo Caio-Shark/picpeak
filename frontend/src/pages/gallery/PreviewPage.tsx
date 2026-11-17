@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../contexts/ThemeContext';
 import { GalleryLayout, PhotoFilterBar } from '../../components/gallery';
 import { Card } from '../../components/common';
@@ -29,6 +30,7 @@ const mockCategories = [
 ];
 
 export const PreviewPage: React.FC = () => {
+  const { t } = useTranslation();
   const { setTheme } = useTheme();
   const [brandingSettings, setBrandingSettings] = useState<any>(null);
   const [selectedCategoryId, setSelectedCategoryId] = useState<number | string | null>(null);
@@ -124,8 +126,8 @@ export const PreviewPage: React.FC = () => {
     >
       <div className="mt-8">
         <div className="text-center mb-6">
-          <h2 className="text-xl font-semibold text-neutral-900">Theme Preview</h2>
-          <p className="text-neutral-600">This is how your galleries will look with the current theme settings</p>
+          <h2 className="text-xl font-semibold text-neutral-900">{t('ui.themePreview', 'Theme Preview')}</h2>
+          <p className="text-neutral-600">{t('ui.themePreviewDescription', 'This is how your galleries will look with the current theme settings')}</p>
         </div>
 
         {/* Filters */}

@@ -26,6 +26,11 @@ RUN npm ci --legacy-peer-deps
 # Copy source files
 COPY . .
 
+# Optional installation default UI language (e.g. "pt"). Empty keeps the
+# upstream behaviour: stored choice, then the browser language, then English.
+ARG VITE_DEFAULT_LANGUAGE=
+ENV VITE_DEFAULT_LANGUAGE=$VITE_DEFAULT_LANGUAGE
+
 # Build the application
 RUN npm run build
 

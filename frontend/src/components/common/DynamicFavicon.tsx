@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { tr } from '../../utils/tr';
 import { usePublicSettings } from '../../hooks/usePublicSettings';
 import { buildResourceUrl } from '../../utils/url';
 
@@ -63,7 +64,7 @@ export const DynamicFavicon: React.FC = () => {
 
     // Update OG meta tags
     const title = companyName || 'PicPeak';
-    const description = tagline || 'Photo Sharing Platform';
+    const description = tagline || tr('ui.photoSharingPlatform', 'Photo Sharing Platform');
 
     const updateMeta = (property: string, content: string) => {
       let meta = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement | null;

@@ -1,6 +1,7 @@
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { galleryService } from '../services';
 import { toast } from 'react-toastify';
+import i18n from '../i18n/config';
 
 export const useGalleryInfo = (slug?: string, token?: string, enabled: boolean = true) => {
   return useQuery({
@@ -57,10 +58,10 @@ export const useDownloadPhoto = () => {
       filename: string;
     }) => galleryService.downloadPhoto(slug, photoId, filename),
     onSuccess: () => {
-      toast.success('Photo downloaded successfully');
+      toast.success(i18n.t('ui.photoDownloaded'));
     },
     onError: () => {
-      toast.error('Failed to download photo');
+      toast.error(i18n.t('ui.photoDownloadFailed'));
     },
   });
 };
@@ -89,7 +90,7 @@ export const useSavePhotoToDevice = () => {
       filename: string;
     }) => galleryService.savePhotoToDevice(slug, photoId, filename),
     onError: () => {
-      toast.error('Failed to save photo');
+      toast.error(i18n.t('ui.photoSaveFailed'));
     },
   });
 };
@@ -99,10 +100,10 @@ export const useDownloadAllPhotos = () => {
     mutationFn: ({ slug, zipReady }: { slug: string; zipReady?: boolean }) =>
       galleryService.downloadAllPhotos(slug, zipReady),
     onSuccess: () => {
-      toast.success('Download started');
+      toast.success(i18n.t('ui.downloadStarted'));
     },
     onError: () => {
-      toast.error('Failed to download photos');
+      toast.error(i18n.t('ui.photosDownloadFailed'));
     },
   });
 };

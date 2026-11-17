@@ -114,7 +114,7 @@ export const CustomCssCard: React.FC<CustomCssCardProps> = ({
       <textarea
         value={customCss}
         onChange={(e) => onCustomCssChange(e.target.value)}
-        placeholder="/* Add custom CSS here */"
+        placeholder={t('ui.customCssPlaceholder', '/* Add custom CSS here */')}
         className="w-full h-40 px-3 py-2 font-mono text-sm border border-neutral-300 dark:border-neutral-600 rounded-lg bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100"
       />
       <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-400">

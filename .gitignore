@@ -161,3 +161,6 @@ ml/*.h5
 /screenshot-*.jpg
 /*-screenshot.png
 /*-screenshot.jpg
+
+# Credenciais locais da instalação pt-BR
+CREDENCIAIS-ADMIN.local.txt

@@ -1,4 +1,5 @@
 import React from 'react';
+import { tr } from '../../../utils/tr';
 import { Heart } from 'lucide-react';
 import { useTheme } from '../../../contexts/ThemeContext';
 import { PhotoCard } from '../PhotoCard';
@@ -118,7 +119,7 @@ const MosaicPhoto: React.FC<MosaicPhotoProps> = ({
         checkboxTestId
         afterOverlay={((photo.like_count ?? 0) > 0 || likedLocal) ? (
           <div className={`absolute ${photo.type === 'collage' ? 'bottom-8' : 'bottom-2'} left-2 z-10`}>
-            <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/90 backdrop-blur-sm" title="Liked">
+            <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/90 backdrop-blur-sm" title={tr('ui.liked', 'Liked')}>
               <Heart className="w-3.5 h-3.5 text-red-500" fill="currentColor" />
             </span>
           </div>

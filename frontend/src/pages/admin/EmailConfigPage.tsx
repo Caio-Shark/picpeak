@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { currentUiLanguage } from '../../utils/tr';
 import {
   Mail,
   Save,
@@ -177,7 +178,7 @@ export const EmailConfigPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'smtp' | 'templates' | 'sent' | 'received'>('smtp');
   const [selectedTemplateKey, setSelectedTemplateKey] = useState<string>('gallery_created');
   const [editedTemplate, setEditedTemplate] = useState<Partial<EmailTemplate>>({});
-  const [editingLang, setEditingLang] = useState<string>('en');
+  const [editingLang, setEditingLang] = useState<string>(() => currentUiLanguage(SUPPORTED_LANGUAGES.map((l) => l.code)));
   const [showPassword, setShowPassword] = useState(false);
   const [testEmail, setTestEmail] = useState('');
   const previewModal = useModal();
@@ -705,7 +706,7 @@ export const EmailConfigPage: React.FC = () => {
                   type="text"
                   value={smtpConfig.from_name}
                   onChange={(e) => setSmtpConfig(prev => ({ ...prev, from_name: e.target.value }))}
-                  placeholder="Photo Sharing"
+                  placeholder={t('ui.photoSharing', 'Photo Sharing')}
                 />
               </div>
 

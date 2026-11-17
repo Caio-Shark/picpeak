@@ -253,7 +253,7 @@ export const AnalyticsPage: React.FC = () => {
           <iframe
             {...dashboardProps}
             className="w-full h-full border-0"
-            title="Umami Analytics Dashboard"
+            title={t('ui.analyticsDashboard', 'Analytics dashboard')}
           />
         </Card>
       </div>

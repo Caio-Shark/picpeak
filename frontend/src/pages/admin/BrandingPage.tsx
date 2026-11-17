@@ -441,7 +441,7 @@ export const BrandingPage: React.FC = () => {
                 onChange={(e) => handleBrandingChange('footer_text', e.target.value)}
                 className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 rounded-lg focus:ring-2 focus:ring-primary-500"
                 rows={2}
-                placeholder={`© ${new Date().getFullYear()} Your Company. All rights reserved.`}
+                placeholder={t('ui.footerPlaceholder', { defaultValue: '© {{year}} Your Company. All rights reserved.', year: new Date().getFullYear() })}
               />
             </div>
           </div>
@@ -627,7 +627,7 @@ export const BrandingPage: React.FC = () => {
                   <div className="flex items-center gap-2">
                     <img 
                       src={brandingSettings.favicon_url.startsWith('http') ? brandingSettings.favicon_url : buildResourceUrl(brandingSettings.favicon_url)} 
-                      alt="Current favicon" 
+                      alt={t('branding.currentFavicon')} 
                       className="w-8 h-8"
                     />
                     <span className="text-sm text-neutral-600 dark:text-neutral-400">{t('branding.currentFavicon')}</span>
@@ -721,7 +721,7 @@ export const BrandingPage: React.FC = () => {
                     <div className="relative">
                       <img
                         src={logoDarkUrl.startsWith('http') ? logoDarkUrl : buildResourceUrl(logoDarkUrl)}
-                        alt="Dark logo"
+                        alt={t('ui.darkLogo', 'Dark logo')}
                         className="h-16 object-contain bg-neutral-800 rounded p-2"
                       />
                       <button

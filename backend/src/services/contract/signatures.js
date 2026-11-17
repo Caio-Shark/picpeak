@@ -188,8 +188,8 @@ async function recordCustomerSignature({ token, name, ip, signatureDataUrl, acce
       caption: {
         name: String(name).trim(),
         signedAt: now,
-        nameLabel: refreshed.contract.language === 'de' ? 'Name' : 'Name',
-        dateLabel: refreshed.contract.language === 'de' ? 'Datum' : 'Date',
+        nameLabel: refreshed.contract.language === 'pt' ? 'Nome' : 'Name',
+        dateLabel: refreshed.contract.language === 'de' ? 'Datum' : refreshed.contract.language === 'pt' ? 'Data' : 'Date',
       },
     });
     const { storedPath: signedPath, sha256: signedSha256 } = await persistContractPdf(

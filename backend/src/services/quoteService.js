@@ -1068,9 +1068,8 @@ function formatMajor(minor, currency, locale, issuerCountryCode) {
   // format, so we force it whenever the issuer sits in that region.
   // Outside DACH we still honour the document locale.
   const cc = (issuerCountryCode || '').toUpperCase();
-  const intlLocale = ['CH', 'LI', 'DE', 'AT'].includes(cc)
-    ? 'de-CH'
-    : (locale === 'de' ? 'de-CH' : 'en-GB');
+  const { intlLocaleFor, intlLocaleForCountry } = require('../utils/docIntlLocale');
+  const intlLocale = intlLocaleForCountry(cc) || intlLocaleFor(locale);
   return new Intl.NumberFormat(intlLocale, {
     style: 'currency', currency: (currency || 'CHF').toUpperCase(),
   }).format(Number(minor || 0) / 100);
@@ -1371,7 +1370,7 @@ async function adminAcceptQuote(id, adminId) {
       const pdfPath = await persistDocPdf('quote', fresh, buffer);
 
       const formatMoney = (minor, currency, locale) =>
-        new Intl.NumberFormat(locale === 'de' ? 'de-CH' : 'en-GB', {
+        new Intl.NumberFormat(require('../utils/docIntlLocale').intlLocaleFor(locale), {
           style: 'currency', currency: (currency || 'CHF').toUpperCase(),
         }).format(Number(minor || 0) / 100);
 

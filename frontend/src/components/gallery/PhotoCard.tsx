@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Download, Maximize2, Check, MessageSquare, Heart } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 import { AuthenticatedImage } from '../common';
@@ -116,6 +117,7 @@ export const PhotoCard: React.FC<PhotoCardProps> = ({
   afterOverlay,
   children,
 }) => {
+  const { t } = useTranslation();
   const guestIdentity = useGuestIdentityOptional();
   const [overlayVisible, setOverlayVisible] = useState(false);
   // #1275 — the input in use right now, not what the device is capable of.
@@ -342,8 +344,8 @@ export const PhotoCard: React.FC<PhotoCardProps> = ({
           onQuickComment();
           hideOverlay();
         }}
-        aria-label="Comment on photo"
-        title="Comment"
+        aria-label={t('ui.commentOnPhoto', 'Comment on photo')}
+        title={t('ui.comment', 'Comment')}
       >
         <MessageSquare className={actionIconClass} />
       </button>
@@ -356,9 +358,9 @@ export const PhotoCard: React.FC<PhotoCardProps> = ({
           liked ? 'bg-red-500/90 hover:bg-red-500' : 'bg-white/90 hover:bg-white'
         }`}
         onClick={handleLike}
-        aria-label={likeToggleLabels && liked ? 'Unlike photo' : 'Like photo'}
+        aria-label={likeToggleLabels && liked ? t('ui.unlikePhoto', 'Unlike photo') : t('ui.likePhoto', 'Like photo')}
         aria-pressed={liked}
-        title={likeToggleLabels ? (liked ? 'Unlike' : 'Like') : 'Like'}
+        title={likeToggleLabels ? (liked ? t('ui.unlike', 'Unlike') : t('ui.like', 'Like')) : t('ui.like', 'Like')}
       >
         <Heart className={`w-5 h-5 ${liked ? 'text-white fill-white' : 'text-neutral-800'}`} />
       </button>
@@ -413,7 +415,7 @@ export const PhotoCard: React.FC<PhotoCardProps> = ({
                     onClick(e);
                     hideOverlay();
                   }}
-                  aria-label="View full size"
+                  aria-label={t('ui.viewFullSize', 'View full size')}
                 >
                   <Maximize2 className={actionIconClass} />
                 </button>
@@ -426,7 +428,7 @@ export const PhotoCard: React.FC<PhotoCardProps> = ({
                       onDownload(e);
                       hideOverlay();
                     }}
-                    aria-label="Download photo"
+                    aria-label={t('ui.downloadPhoto', 'Download photo')}
                   >
                     <Download className={actionIconClass} />
                   </button>
@@ -475,7 +477,7 @@ export const PhotoCard: React.FC<PhotoCardProps> = ({
           {/* Selection Checkbox (visible on hover or when selected) */}
           <button
             type="button"
-            aria-label={`Select ${photo.filename}`}
+            aria-label={t('ui.selectPhoto', { defaultValue: 'Select {{filename}}', filename: photo.filename })}
             role="checkbox"
             aria-checked={isSelected}
             data-testid={checkboxTestId ? `gallery-photo-checkbox-${photo.id}` : undefined}

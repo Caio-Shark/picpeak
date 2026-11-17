@@ -132,17 +132,17 @@ export const AdminPhotoGrid: React.FC<AdminPhotoGridProps> = ({
   const handleDeleteSingle = async (photo: AdminPhoto, e: React.MouseEvent) => {
     e.stopPropagation();
     
-    if (!confirm(`Are you sure you want to delete "${photo.filename}"?`)) {
+    if (!confirm(t('ui.confirmDeletePhoto', { defaultValue: 'Are you sure you want to delete \"{{filename}}\"?', filename: photo.filename }))) {
       return;
     }
 
     setDeletingPhotos(prev => new Set(prev).add(photo.id));
     try {
       await photosService.deletePhoto(eventId, photo.id);
-      toast.success('Photo deleted successfully');
+      toast.success(t('ui.photoDeleted', 'Photo deleted successfully'));
       onPhotosDeleted();
     } catch {
-      toast.error('Failed to delete photo');
+      toast.error(t('ui.photoDeleteFailed', 'Failed to delete photo'));
       setDeletingPhotos(prev => {
         const newSet = new Set(prev);
         newSet.delete(photo.id);
@@ -155,7 +155,7 @@ export const AdminPhotoGrid: React.FC<AdminPhotoGridProps> = ({
     if (selectedPhotos.size === 0) return;
 
     const count = selectedPhotos.size;
-    if (!confirm(`Are you sure you want to delete ${count} photo${count > 1 ? 's' : ''}?`)) {
+    if (!confirm(t('ui.confirmDeletePhotos', { defaultValue: 'Are you sure you want to delete {{count}} photos?', count }))) {
       return;
     }
 
@@ -165,14 +165,14 @@ export const AdminPhotoGrid: React.FC<AdminPhotoGridProps> = ({
     
     try {
       await photosService.deletePhotos(eventId, selectedIds);
-      toast.success(`${count} photo${count > 1 ? 's' : ''} deleted successfully`);
+      toast.success(t('ui.photosDeleted', { defaultValue: '{{count}} photos deleted successfully', count }));
       setSelectedPhotos(new Set());
       setAnchor(null);
       setIsSelectionMode(false);
       onSelectionChange?.([]);
       onPhotosDeleted();
     } catch {
-      toast.error('Failed to delete photos');
+      toast.error(t('ui.photosDeleteFailed', 'Failed to delete photos'));
       setDeletingPhotos(new Set());
     } finally {
       setIsDeleting(false);
@@ -183,9 +183,9 @@ export const AdminPhotoGrid: React.FC<AdminPhotoGridProps> = ({
     e.stopPropagation();
     try {
       await photosService.downloadPhoto(eventId, photo.id, photo.filename);
-      toast.success('Download started');
+      toast.success(t('ui.downloadStarted', 'Download started'));
     } catch {
-      toast.error('Failed to download photo');
+      toast.error(t('ui.photoDownloadFailed', 'Failed to download photo'));
     }
   };
 
@@ -374,7 +374,7 @@ export const AdminPhotoGrid: React.FC<AdminPhotoGridProps> = ({
             {/* Selection Checkbox (top-right) */}
             <button
               type="button"
-              aria-label={`Select ${photo.filename}`}
+              aria-label={t('ui.selectPhoto', { defaultValue: 'Select {{filename}}', filename: photo.filename })}
               role="checkbox"
               aria-checked={selectedPhotos.has(photo.id)}
               data-testid={`admin-photo-checkbox-${photo.id}`}
@@ -576,13 +576,13 @@ export const AdminPhotoGrid: React.FC<AdminPhotoGridProps> = ({
             {(commentCount > 0 || averageRating > 0 || likeCount > 0) && (
               <div className="absolute bottom-2 right-2 flex items-center gap-1 z-10">
                 {averageRating > 0 && (
-                  <div className="bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 flex items-center gap-1" title={`Rating: ${Number(averageRating).toFixed(1)}`}>
+                  <div className="bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 flex items-center gap-1" title={t('ui.ratingValue', { defaultValue: 'Rating: {{value}}', value: Number(averageRating).toFixed(1) })}>
                     <Star className="w-3.5 h-3.5 text-yellow-500" fill="currentColor" />
                     <span className="text-xs font-medium text-neutral-700">{Number(averageRating).toFixed(1)}</span>
                   </div>
                 )}
                 {commentCount > 0 && (
-                  <div className="bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 flex items-center gap-1" title={`${commentCount} comments`}>
+                  <div className="bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 flex items-center gap-1" title={t('ui.commentsCount', { defaultValue: '{{count}} comments', count: commentCount })}>
                     <MessageSquare className="w-3.5 h-3.5 text-accent" fill="currentColor" />
                     <span className="text-xs font-medium text-neutral-700">{commentCount}</span>
                   </div>
@@ -652,7 +652,7 @@ export const AdminPhotoGrid: React.FC<AdminPhotoGridProps> = ({
                   <td className="px-3 py-2" onClick={(e) => e.stopPropagation()}>
                     <button
                       type="button"
-                      aria-label={`Select ${photo.filename}`}
+                      aria-label={t('ui.selectPhoto', { defaultValue: 'Select {{filename}}', filename: photo.filename })}
                       role="checkbox"
                       aria-checked={isSelected}
                       data-testid={`admin-photo-row-checkbox-${photo.id}`}
@@ -761,13 +761,13 @@ export const AdminPhotoGrid: React.FC<AdminPhotoGridProps> = ({
                     {averageRating > 0 || commentCount > 0 ? (
                       <div className="flex items-center justify-end gap-2">
                         {averageRating > 0 && (
-                          <span className="inline-flex items-center gap-0.5" title={`Rating: ${Number(averageRating).toFixed(1)}`}>
+                          <span className="inline-flex items-center gap-0.5" title={t('ui.ratingValue', { defaultValue: 'Rating: {{value}}', value: Number(averageRating).toFixed(1) })}>
                             <Star className="w-3.5 h-3.5 text-yellow-500" fill="currentColor" />
                             {Number(averageRating).toFixed(1)}
                           </span>
                         )}
                         {commentCount > 0 && (
-                          <span className="inline-flex items-center gap-0.5" title={`${commentCount} comments`}>
+                          <span className="inline-flex items-center gap-0.5" title={t('ui.commentsCount', { defaultValue: '{{count}} comments', count: commentCount })}>
                             <MessageSquare className="w-3.5 h-3.5 text-accent" fill="currentColor" />
                             {commentCount}
                           </span>

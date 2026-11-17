@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { api } from '../../config/api';
 
 interface AdminAuthenticatedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
@@ -12,6 +13,7 @@ export const AdminAuthenticatedImage: React.FC<AdminAuthenticatedImageProps> = (
   alt,
   ...props
 }) => {
+  const { t } = useTranslation();
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -70,7 +72,7 @@ export const AdminAuthenticatedImage: React.FC<AdminAuthenticatedImageProps> = (
       <>{fallback}</>
     ) : (
       <div className="w-full h-full bg-neutral-100 flex items-center justify-center text-neutral-400">
-        <span className="text-xs">Failed to load</span>
+        <span className="text-xs">{t('ui.failedToLoad', 'Failed to load')}</span>
       </div>
     );
   }

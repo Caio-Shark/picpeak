@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
+import { tr } from './utils/tr';
 import { BrowserRouter as Router, Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ToastContainer } from 'react-toastify';
@@ -462,6 +463,7 @@ function App() {
               draggable
               pauseOnHover
               theme={toastTheme}
+              aria-label={tr('ui.notificationsRegion', 'Notifications Alt+T')}
             />
               </ConfirmDialogProvider>
             </GlobalThemeProvider>

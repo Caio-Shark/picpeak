@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { tr } from '../../utils/tr';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
@@ -124,7 +125,7 @@ export const CMSContentBlock: React.FC<CMSContentBlockProps> = ({ slug, fallback
                 className="text-sm font-medium hover:underline"
                 style={{ color: 'var(--color-accent)' }}
               >
-                {lang === 'de' ? '← Zur Startseite' : '← Back to home'}
+                {lang === 'de' ? '← Zur Startseite' : tr('ui.backToHome', '← Back to home')}
               </Link>
             </div>
           </Card>

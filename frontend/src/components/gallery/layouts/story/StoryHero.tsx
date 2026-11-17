@@ -1,4 +1,5 @@
 import React from 'react';
+import { tr } from '../../../../utils/tr';
 import { motion } from 'framer-motion';
 import { parseISO } from 'date-fns';
 import { ChevronDown } from 'lucide-react';
@@ -44,7 +45,7 @@ export const StoryHero: React.FC<StoryHeroProps> = ({
             // of every Story gallery. Emitted unconditionally for every photo
             // (gallery.js:1139), so the fallbacks below are belt-and-braces.
             src={photo.hero_url || photo.url || photo.thumbnail_url || ''}
-            alt="Hero"
+            alt={tr('ui.heroImage', 'Hero')}
             className="w-full h-full object-cover"
             isGallery={true}
             slug={slug}

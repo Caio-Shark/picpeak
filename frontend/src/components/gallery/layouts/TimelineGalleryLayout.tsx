@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { tr } from '../../../utils/tr';
 import { Calendar, Heart } from 'lucide-react';
 import { format, startOfDay, startOfWeek, startOfMonth } from 'date-fns';
 import { useTheme } from '../../../contexts/ThemeContext';
@@ -165,7 +166,7 @@ export const TimelineGalleryLayout: React.FC<BaseGalleryLayoutProps> = ({
                     }
                     afterOverlay={((photo.like_count ?? 0) > 0 || likedIds.has(photo.id)) ? (
                       <div className={`absolute ${photo.type === 'collage' ? 'bottom-8' : 'bottom-2'} left-2 z-10`}>
-                        <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/90 backdrop-blur-sm" title="Liked">
+                        <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/90 backdrop-blur-sm" title={tr('ui.liked', 'Liked')}>
                           <Heart className="w-3.5 h-3.5 text-red-500" fill="currentColor" />
                         </span>
                       </div>

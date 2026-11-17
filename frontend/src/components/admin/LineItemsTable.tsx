@@ -432,11 +432,11 @@ export const LineItemsTable: React.FC<Props> = ({
                     </td>
                     <td className="px-2 py-2 align-top">
                       <div className="flex items-center gap-1 justify-end flex-wrap">
-                        <button type="button" onClick={() => move(idx, -1)} aria-label="Move up"
+                        <button type="button" onClick={() => move(idx, -1)} aria-label={t('categories.moveUp')}
                           className="p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700 disabled:opacity-30">
                           <ArrowUp className="w-4 h-4" />
                         </button>
-                        <button type="button" onClick={() => move(idx, 1)} aria-label="Move down"
+                        <button type="button" onClick={() => move(idx, 1)} aria-label={t('categories.moveDown')}
                           className="p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700 disabled:opacity-30">
                           <ArrowDown className="w-4 h-4" />
                         </button>
@@ -448,7 +448,7 @@ export const LineItemsTable: React.FC<Props> = ({
                           </button>
                         )}
                         {onSaveAsPreset && !sub && (
-                          <button type="button" onClick={() => onSaveAsPreset(li)} aria-label="Save as preset"
+                          <button type="button" onClick={() => onSaveAsPreset(li)} aria-label={t('crm.lineItems.saveAsPreset')}
                             className="p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700"
                             title={t('crm.lineItems.saveAsPreset', 'Save as preset') as string}>
                             <SaveIcon className="w-4 h-4" />

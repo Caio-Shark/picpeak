@@ -723,7 +723,7 @@ export const CreateEventPage: React.FC = () => {
                   </div>
                 </div>
                 <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                  Gallery Layout: <span className="font-medium capitalize">{formData.theme_config.galleryLayout || 'grid'}</span>
+                  {t('ui.galleryLayoutLabel', 'Gallery Layout')}: <span className="font-medium">{t(`ui.layouts.${formData.theme_config.galleryLayout || 'grid'}`, formData.theme_config.galleryLayout || 'grid')}</span>
                 </p>
               </div>
             )}

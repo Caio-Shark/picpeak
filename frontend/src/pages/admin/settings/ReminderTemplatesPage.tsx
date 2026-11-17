@@ -29,6 +29,7 @@
  */
 
 import React, { useEffect, useMemo, useState } from 'react';
+import { currentUiLanguage } from '../../../utils/tr';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -140,7 +141,7 @@ export const ReminderTemplatesPage: React.FC = () => {
 
   // ---- Selection + per-template fetch ----------------------------------
   const [selectedKey, setSelectedKey] = useState<string>(TEMPLATE_KEY_DEFAULT);
-  const [editingLang, setEditingLang] = useState<string>('en');
+  const [editingLang, setEditingLang] = useState<string>(() => currentUiLanguage(SUPPORTED_LANGUAGES.map((l) => l.code)));
 
   // Default template — always loaded so per-type rows that don't exist
   // yet can prefill their form from it.
@@ -187,7 +188,7 @@ export const ReminderTemplatesPage: React.FC = () => {
       }
     }
     setTranslations(next);
-    setEditingLang('en');
+    setEditingLang(currentUiLanguage(SUPPORTED_LANGUAGES.map((l) => l.code)));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedKey, selectedTemplate, defaultTemplate]);
 

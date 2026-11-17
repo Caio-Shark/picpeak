@@ -99,7 +99,7 @@ export const HoursLoggingPage: React.FC = () => {
                 product. */}
             <span
               className="text-[10px] uppercase tracking-wider px-1.5 py-0.5 rounded font-semibold bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300"
-              title="Beta — feature is functional but still evolving"
+              title={t('ui.betaTooltip', 'Beta — feature is functional but still evolving')}
             >
               {t('navigation.betaTag', 'Beta')}
             </span>
