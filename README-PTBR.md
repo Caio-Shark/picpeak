@@ -209,11 +209,16 @@ Esses comandos de backup e restauração foram testados nesta instalação: o du
 
 ## 10. Atualizar a aplicação
 
-A tradução vive na branch `traducao-pt-br`, criada a partir da tag estável `v3.135.16`. Para trazer uma nova versão estável do PicPeak:
+A tradução vive na branch `traducao-pt-br`, criada a partir da tag estável `v3.135.16` e publicada no fork <https://github.com/Caio-Shark/picpeak>. Remotos usados:
+
+- `origin` — o fork (`Caio-Shark/picpeak`), para onde a tradução é enviada;
+- `upstream` — o projeto oficial (`PicPeak/picpeak`), de onde vêm as novas versões.
+
+Para trazer uma nova versão estável do PicPeak:
 
 ```powershell
 # 0. Faça um backup (seção 8)
-git fetch origin --tags
+git fetch upstream --tags
 git tag --sort=-creatordate | Select-Object -First 10   # veja a versão estável mais nova (ex.: v3.135.17)
 
 git checkout traducao-pt-br
@@ -223,6 +228,8 @@ git merge v3.135.17          # substitua pela versão desejada
 cd frontend; node scripts/i18n-ptbr.mjs check; cd ..   # veja se surgiram textos novos sem tradução
 docker compose build
 docker compose up -d
+
+git push origin traducao-pt-br   # publica a atualização no seu fork
 ```
 
 As migrações do banco rodam sozinhas na inicialização do backend. Conflitos de merge são raros, porque as traduções ficam em arquivos próprios (seção 11); se ocorrerem, normalmente estarão em `frontend/src/i18n/locales/en.json`/`de.json` (bloco `ui`) ou em algum componente com texto que esta branch passou a traduzir.
